@@ -1,10 +1,21 @@
 .game-container {
   display: grid;
-  grid-template-columns: repeat(7,150px);
-  grid-template-rows: repeat(6,150px);
+  grid-template-columns: repeat(7,130px);
+  grid-template-rows: repeat(6,130px);
   margin: 2em;
 }
 .board-cell {
+  position: relative;
   background-color: blue;
   border: 1px solid black;
+}
+.pawn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: white;
 }

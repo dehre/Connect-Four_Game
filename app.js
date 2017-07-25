@@ -16,6 +16,9 @@ for(var i=0;i<rows;i++){
   for(var j=0;j<columns;j++){
     var $newCell = $("<div></div>");
     $newCell.addClass("board-cell row-"+i + " cell-"+j);
+    var $newInnerCircle = $("<div></div>");
+    $newInnerCircle.addClass("pawn");
+    $newInnerCircle.appendTo($newCell);
     $newCell.appendTo($gameContainer);
   }
 }
