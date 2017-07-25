@@ -11,16 +11,13 @@ var $gameContainer = $(".game-container");
 
 // Create board programmatically
 // Add columns
-for(var i=0;i<columns;i++){
-  var $newColumn = $("<div></div>");
-  $newColumn.addClass("board-column col-"+i);
+for(var i=0;i<rows;i++){
   // Add cells
-  for(var j=0;j<rows;j++){
+  for(var j=0;j<columns;j++){
     var $newCell = $("<div></div>");
-    $newCell.addClass("board-cell cell-"+j);
-    $newCell.appendTo($newColumn);
+    $newCell.addClass("board-cell row-"+i + " cell-"+j);
+    $newCell.appendTo($gameContainer);
   }
-  $newColumn.appendTo($gameContainer);
 }
 
 
