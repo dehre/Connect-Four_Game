@@ -79,7 +79,7 @@ $(document).ready(function(){
       var pawn = $lastPlayedColumnPawns.filter(".row-"+i).children().first();
       // if empty cell found, fill it and break the loop
       if(!pawn.hasClass("pawn-filled")){
-        pawn.addClass("pawn-filled");
+        playerTonyTurn ? pawn.addClass("pawn-filled pawn-tony") : pawn.addClass("pawn-filled pawn-paul");
         // break the loop if empty cell found
         return false;
       }
@@ -93,3 +93,7 @@ $(document).ready(function(){
 
 
 }); //end or '$document.ready()'
+
+
+// create JS representation of all elements
+// add boolean to check if item filled
