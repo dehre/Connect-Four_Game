@@ -71,8 +71,9 @@ $gameContainer.click(function(e){
   for(var i=0;i<$lastPlayedColumnPawns.length;i++){ //looping through rows
     // find selected element
     searchedElement = $lastPlayedColumnPawns.filter(".row-"+i);
-    if(!searchedElement.hasClass("pawn-filled")){
-      searchedElement.addClass("pawn-filled");
+    console.log("searchedElement is",searchedElement);
+    if(!searchedElement.children().eq(0).hasClass("pawn-filled")){
+      searchedElement.children().eq(0).addClass("pawn-filled");
       break;
     }
 
