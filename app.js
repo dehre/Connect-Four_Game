@@ -5,6 +5,7 @@ $(document).ready(function(){
   var rows = 6;
   var playerTonyTurn = false;
   var lastPlayedPawn = {};
+  var tableCells = {};
 
 
   // // DOM references
@@ -13,6 +14,13 @@ $(document).ready(function(){
 
 
   // // Helper functions
+
+  function createTableCell(columnNumber,rowNumber){
+    var cell = {};
+    cell.col = columnNumber;
+    cell.row = rowNumber;
+    return cell;
+  }
 
   // take row and column number of clicked pawn
   function takeClickedPawn(pawnDOMElement){
@@ -47,6 +55,14 @@ $(document).ready(function(){
     return $gameContainer.children("."+direction+"-"+boardCell[direction]);
   }
 
+
+
+  // // Create 'tableCells' object with all properties of cells
+  for(var c=0;c<columns;c++){
+    for(var r=0;r<rows;r++){
+      tableCells["c"+c+"-r"+r] = createTableCell(c,r);
+    }
+  }
 
 
 
