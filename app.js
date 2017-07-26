@@ -19,12 +19,14 @@ function takeClickedPawnPosition(pawnDOMElement){
   var pawnObj = {};
   // first check if clicked on a pawn itself or on the board
   if($(pawnDOMElement).hasClass("board-cell")){
-    pawnObj.jQueryElement = $(pawnDOMElement);
+    pawnObj.jQueryCellElement = $(pawnDOMElement);
   } else {
-    pawnObj.jQueryElement = $(pawnDOMElement).parent();
+    pawnObj.jQueryCellElement = $(pawnDOMElement).parent();
   }
+  // take a reference of the '.pawn' rounded <div> element inside the '.board-cell' itself
+  pawnObj.jQueryPawnElement = pawnObj.jQueryCellElement.children().first();
   // create list of classes related to the clicked element
-  var elementClassList = pawnObj.jQueryElement.attr("class").split(" ");
+  var elementClassList = pawnObj.jQueryCellElement.attr("class").split(" ");
   // retrieve the clicked row and column clicked (as number)
   elementClassList.forEach(function(className){
     if(className.indexOf("row-")===0){
@@ -33,7 +35,7 @@ function takeClickedPawnPosition(pawnDOMElement){
       pawnObj.col = className.substr(-1);
     }
   });
-  // return object filled with current position of element in the board
+  // return object filled with current position of element in the board and its jQuery representation
   return pawnObj;
 }
 
@@ -60,6 +62,16 @@ $gameContainer.click(function(e){
 
   lastPlayedPawn = takeClickedPawnPosition(e.target);
   console.log(lastPlayedPawn);
+  //check if pawn is empty
+  if(lastPlayedPawn.jQueryPawnElement.hasClass("pawn-filled")){
+    //add CSS class
+    lastPlayedPawn.jQueryPawnElement.addClass("pawn-filled");
+  } else {
+    // else if not empty, go above and check again
+
+    // if all column fill, add message <div> elsewhere to inform user
+  }
+
 
 });
 
