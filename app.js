@@ -14,7 +14,7 @@ var $gameContainer = $(".game-container");
 // // Helper functions
 
 // take row and column number of clicked pawn
-function takeClickedPawnPosition(pawnDOMElement){
+function takeClickedPawn(pawnDOMElement){
   // create empty object that contains current position of pawn, and pawn itself as jQuery object
   var pawnObj = {};
   // first check if clicked on a pawn itself or on the board
@@ -39,6 +39,14 @@ function takeClickedPawnPosition(pawnDOMElement){
   return pawnObj;
 }
 
+// get array of all elements in same line of specific 'board-cell'
+// first argument --> the boardCell element
+// second argument --> direction to check ("row" or "col")
+function getPawnElementsByLine(boardCell,direction){
+  return $gameContainer.children("."+direction+"-"+boardCell[direction]);
+}
+
+
 
 
 // // Create board programmatically
@@ -60,9 +68,9 @@ for(var i=rows-1;i>=0;i--){
 // // Add 'click' eventListener on entire board to fill the '.pawn'
 $gameContainer.click(function(e){
   // take reference of last played pawn
-  lastPlayedPawn = takeClickedPawnPosition(e.target);
+  lastPlayedPawn = takeClickedPawn(e.target);
   // take reference of all elements on same line as last played pawn
-  var $lastPlayedColumnPawns = $gameContainer.children(".col-" + lastPlayedPawn.col);
+  var $lastPlayedColumnPawns = getPawnElementsByLine(lastPlayedPawn,"col");
 
   // start from 'row-0' element and fill first empty cell going above
   $lastPlayedColumnPawns.each(function(i){
@@ -76,21 +84,7 @@ $gameContainer.click(function(e){
     }
   });
 
-  // // start from 'row-0' element and fill first empty cell going above
-  // for(var i=0;i<$lastPlayedColumnPawns.length;i++){
-  //   // 'pawn' is the current pawn we're iterating on
-  //   pawn = $lastPlayedColumnPawns.filter(".row-"+i).children().first();
-  //   // if empty cell found, fill it and break the loop
-  //   if(!pawn.hasClass("pawn-filled")){
-  //     pawn.addClass("pawn-filled");
-  //     // break the loop if empty cell found
-  //     break;
-  //   }
-  //
-  // }
-
-
-  // if all column filled, add message <div> elsewhere to inform user
+  //?? TO IMPLEMENT: if all column filled, add message <div> elsewhere to inform user
 
 
 });
