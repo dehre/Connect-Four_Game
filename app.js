@@ -37,7 +37,7 @@ function takeClickedPawnPosition(pawnDOMElement){
 
 // // Create board programmatically
 // Add columns
-for(var i=0;i<rows;i++){
+for(var i=rows-1;i>=0;i--){
   // Add cells
   for(var j=0;j<columns;j++){
     var $newCell = $("<div></div>");
