@@ -3,13 +3,15 @@ $(document).ready(function(){
 // Settings - varible declarations
 var columns = 7;
 var rows = 6;
+var clickedRow;
+var clickedColumn;
 
 // DOM references
 var $gameContainer = $(".game-container");
 
 
 
-// Create board programmatically
+// // Create board programmatically
 // Add columns
 for(var i=0;i<rows;i++){
   // Add cells
@@ -23,26 +25,26 @@ for(var i=0;i<rows;i++){
   }
 }
 
-// Add 'click' eventListener on entire board to fill the '.pawn'
+// // Add 'click' eventListener on entire board to fill the '.pawn'
 $gameContainer.click(function(e){
-  console.dir(e.target);
-  var completeClassList = [];
-  // e.target.classList.forEach(function(class){
-  //   completeClassList.push(class);
-  // });
-  // e.target.parentNode.classList.forEach(function(class){
-  //   completeClassList.push(class);
-  // });
-  for(var i=0;i<e.target.classList;i++){
-    completeClassList.push(e.target.classList[i]);
+  // bring list of classes related to the clicked element
+  var elementClassList = [];
+  if($(e.target).hasClass("board-cell")){
+    elementClassList = $(e.target).attr("class").split(" ");
+  } else {
+    elementClassList = $(e.target).parent().attr("class").split(" ");
   }
-  for(var i=0;i<e.target.parentNode.classList;i++){
-    completeClassList.push(e.target.parentNode.classList[i]);
-  }
-
-  console.log(completeClassList);
-  console.log("row clicked:");
-  console.log("column clicked:");
+  console.log(elementClassList);
+  // retrieve the clicked row and column clicked (as number)
+  elementClassList.forEach(function(className){
+    if(className.indexOf("row-")===0){
+      clickedRow = className.substr(-1);
+    } else if(className.indexOf("col-")===0) {
+      clickedCol = className.substr(-1);
+    }
+  });
+  console.log("row clicked:", clickedRow);
+  console.log("column clicked:", clickedCol);
 });
 
 
