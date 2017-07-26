@@ -62,6 +62,15 @@ $gameContainer.click(function(e){
 
   lastPlayedPawn = takeClickedPawnPosition(e.target);
   console.log(lastPlayedPawn);
+
+  // take the column number
+  // start from position 0, check if empty and fill first empty cell
+
+
+
+
+  
+
   //check if pawn is empty
   if(lastPlayedPawn.jQueryPawnElement.hasClass("pawn-filled")){
     //add CSS class
