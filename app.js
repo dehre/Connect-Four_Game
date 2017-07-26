@@ -60,26 +60,16 @@ for(var i=rows-1;i>=0;i--){
 // // Add 'click' eventListener on entire board to fill the '.pawn'
 $gameContainer.click(function(e){
 
+  // take reference of last played pawn
   lastPlayedPawn = takeClickedPawnPosition(e.target);
   console.log(lastPlayedPawn);
+  // take reference of all elements on same line as last played pawn
+  var $lastPlayedColumnPawns = $gameContainer.children(".col-"+lastPlayedPawn.col);
+  console.log($lastPlayedColumnPawns);
 
-  // take the column number
-  // start from position 0, check if empty and fill first empty cell
+  // start from 'row-0' element and fill first empty cell going above
 
-
-
-
-  
-
-  //check if pawn is empty
-  if(lastPlayedPawn.jQueryPawnElement.hasClass("pawn-filled")){
-    //add CSS class
-    lastPlayedPawn.jQueryPawnElement.addClass("pawn-filled");
-  } else {
-    // else if not empty, go above and check again
-
-    // if all column fill, add message <div> elsewhere to inform user
-  }
+  // if all column fill, add message <div> elsewhere to inform user
 
 
 });
