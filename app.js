@@ -59,27 +59,24 @@ for(var i=rows-1;i>=0;i--){
 
 // // Add 'click' eventListener on entire board to fill the '.pawn'
 $gameContainer.click(function(e){
-  // useful variables
-  var searchedElement;
+  // just helper-variable
+  var pawn;
   // take reference of last played pawn
   lastPlayedPawn = takeClickedPawnPosition(e.target);
   // take reference of all elements on same line as last played pawn
   var $lastPlayedColumnPawns = $gameContainer.children(".col-" + lastPlayedPawn.col);
 
   // start from 'row-0' element and fill first empty cell going above
-  // start finding 'row-0' element
-  for(var i=0;i<$lastPlayedColumnPawns.length;i++){ //looping through rows
-    // find selected element
-    searchedElement = $lastPlayedColumnPawns.filter(".row-"+i);
-    console.log("searchedElement is",searchedElement);
-    if(!searchedElement.children().eq(0).hasClass("pawn-filled")){
-      searchedElement.children().eq(0).addClass("pawn-filled");
+  for(var i=0;i<$lastPlayedColumnPawns.length;i++){
+    // 'pawn' is the current pawn we're iterating on
+    pawn = $lastPlayedColumnPawns.filter(".row-"+i).children().first();
+    // if empty cell found, fill it and break the loop
+    if(!pawn.hasClass("pawn-filled")){
+      pawn.addClass("pawn-filled");
+      // break the loop if empty cell found
       break;
     }
 
-    // check if class
-
-    //if not, continue the loop
   }
 
 
