@@ -71,10 +71,10 @@
     var clickedCell = Cell.prototype.getCellInstance(DOMElement);
     // fill corresponding DOM element and update instance with new data
     if(tonyTurn){
-      clickedCell.get$DOMPawn.addClass("pawn-tony");
+      clickedCell.get$DOMPawn().addClass("pawn-tony");
       clickedCell.tonyPawn = true;
     } else {
-      clickedCell.get$DOMPawn.addClass("pawn-paul");
+      clickedCell.get$DOMPawn().addClass("pawn-paul");
       clickedCell.paulPawn = true;
     };
     clickedCell.filled = true;
@@ -114,35 +114,52 @@
 
   // // Add 'click' eventListener on entire board to fill the '.pawn'
   $gameContainer.click(function(e){
-    //TESTING
-    getCellInstance(e.target);
-    // END TESTING
-    // take reference of last played pawn
-    lastPlayedPawn = takeClickedPawn(e.target);
-    // take reference of all elements on same line as last played pawn
-    var $lastPlayedColumnPawns = getPawnElementsByLine(lastPlayedPawn,"col");
-
-    // start from 'row-0' element and fill first empty cell going above
-    $lastPlayedColumnPawns.each(function(i){
-      // 'pawn' is the current pawn we're iterating on
-      var pawn = $lastPlayedColumnPawns.filter(".row-"+i).children().first();
-      // if empty cell found, fill it and break the loop
-      if(!pawn.hasClass("pawn-filled")){
-        playerTonyTurn ? pawn.addClass("pawn-filled pawn-tony") : pawn.addClass("pawn-filled pawn-paul");
-        // break the loop if empty cell found
-        return false;
-      }
-    });
-
-    //?? TO IMPLEMENT: if all column filled, add message <div> elsewhere to inform user
+    // invoke 'addPawn()' to fill first empty cell in column
+    addPawn(e.target,playerTonyTurn);
 
     // change player's turn
     playerTonyTurn = !playerTonyTurn;
+
+    //?? TO IMPLEMENT: if all column filled, add message <div> elsewhere to inform user
+
   }); //end '$gameContainer.click()'
 
 
 // }); //end or '$document.ready()'
 
 
-// create JS representation of all elements
-// add boolean to check if item filled
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Was Inside click handler
+//TESTING
+// getCellInstance(e.target);
+// // END TESTING
+// // take reference of last played pawn
+// lastPlayedPawn = takeClickedPawn(e.target);
+// // take reference of all elements on same line as last played pawn
+// var $lastPlayedColumnPawns = getPawnElementsByLine(lastPlayedPawn,"col");
+//
+// // start from 'row-0' element and fill first empty cell going above
+// $lastPlayedColumnPawns.each(function(i){
+//   // 'pawn' is the current pawn we're iterating on
+//   var pawn = $lastPlayedColumnPawns.filter(".row-"+i).children().first();
+//   // if empty cell found, fill it and break the loop
+//   if(!pawn.hasClass("pawn-filled")){
+//     playerTonyTurn ? pawn.addClass("pawn-filled pawn-tony") : pawn.addClass("pawn-filled pawn-paul");
+//     // break the loop if empty cell found
+//     return false;
+//   }
+// });
