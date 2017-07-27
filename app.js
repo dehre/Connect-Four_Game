@@ -69,16 +69,30 @@
   function addPawn(DOMElement,tonyTurn){
     // retrieve correct instance of 'Cell'
     var clickedCell = Cell.prototype.getCellInstance(DOMElement);
-    // fill corresponding DOM element and update instance with new data
-    if(tonyTurn){
-      clickedCell.get$DOMPawn().addClass("pawn-tony");
-      clickedCell.tonyPawn = true;
-    } else {
-      clickedCell.get$DOMPawn().addClass("pawn-paul");
-      clickedCell.paulPawn = true;
-    };
-    clickedCell.filled = true;
-  };
+
+    // check for first empty fill starting from below. Then fill it and update its instance.
+    // if no empty cells, return false --> so can handle it.
+    for(var i=0;i<rows;i++){
+      if(!tableCells["c"+clickedCell.col+"r"+i].filled){
+        var firstEmptyCell = tableCells["c"+clickedCell.col+"r"+i];
+        console.log("found!",firstEmptyCell);
+
+        // fill corresponding DOM element (of 'firstEmptyCell') and update instance with new data
+        if(tonyTurn){
+          firstEmptyCell.get$DOMPawn().addClass("pawn-tony");
+          firstEmptyCell.tonyPawn = true;
+        } else {
+          firstEmptyCell.get$DOMPawn().addClass("pawn-paul");
+          firstEmptyCell.paulPawn = true;
+        };
+        firstEmptyCell.filled = true;
+        // break the loop if an empty cell was found, and exit the function
+        return true;
+      };
+    }
+    // if 'for' loop ended without founding an empty cell, means all column is filled, so we return false --> then we can handle it outside
+    return false;
+  }; // end 'addPawn()'
 
 
 
@@ -120,7 +134,7 @@
     // change player's turn
     playerTonyTurn = !playerTonyTurn;
 
-    //?? TO IMPLEMENT: if all column filled, add message <div> elsewhere to inform user
+    //?? TO IMPLEMENT: if all column filled, 'addPawn()' returns false --> add message <div> elsewhere to inform user
 
   }); //end '$gameContainer.click()'
 
