@@ -1,4 +1,4 @@
-$(document).ready(function(){
+// $(document).ready(function(){
 
   // // Settings - varible declarations
   var columns = 7;
@@ -18,7 +18,35 @@ $(document).ready(function(){
   function Cell(columnNumber,rowNumber){
     this.col = columnNumber;
     this.row = rowNumber;
-  }
+  };
+
+
+  // when clicking on a 'pawn', get back its corresponding 'Cell' instance
+  function getCellInstance(pawnDOMElement){
+
+    var pawn$Element;
+    var row;
+    var col;
+    // first check if clicked on a pawn itself or on the board
+    if($(pawnDOMElement).hasClass("board-cell")){
+      pawn$Element = $(pawnDOMElement);
+    } else {
+      pawn$Element = $(pawnDOMElement).parent();
+    };
+
+    // create list of classes related to the clicked element
+    var elementClassList = pawn$Element.attr("class").split(" ");
+    // retrieve the clicked row and column clicked (as number)
+    elementClassList.forEach(function(className){
+      if(className.indexOf("row-")===0){
+        row = className.substr(-1);
+      } else if(className.indexOf("col-")===0) {
+        col = className.substr(-1);
+      }
+    });
+    
+
+  } //end 'getCellInstance'
 
   // take row and column number of clicked pawn
   function takeClickedPawn(pawnDOMElement){
@@ -86,6 +114,9 @@ $(document).ready(function(){
 
   // // Add 'click' eventListener on entire board to fill the '.pawn'
   $gameContainer.click(function(e){
+    //TESTING
+    getCellInstance(e.target);
+    // END TESTING
     // take reference of last played pawn
     lastPlayedPawn = takeClickedPawn(e.target);
     // take reference of all elements on same line as last played pawn
@@ -110,7 +141,7 @@ $(document).ready(function(){
   }); //end '$gameContainer.click()'
 
 
-}); //end or '$document.ready()'
+// }); //end or '$document.ready()'
 
 
 // create JS representation of all elements
