@@ -8,7 +8,7 @@
 
 
   // // DOM references
-  var $gameContainer = $(".game-container");
+  var $gameContainer = $("#game-container");
 
 
 
@@ -19,6 +19,16 @@
     this.col = columnNumber;
     this.row = rowNumber;
   };
+
+  // get back the corresponding jQuery DOM element of the instance itself
+  Cell.prototype.get$DOMCell = function(){
+    var searchedClassName = ".row-" + this.row + ".col-" + this.col;
+    console.log("searchedClass ",searchedClassName);
+    return $($gameContainer.children(searchedClassName)[0]);
+  };
+
+  // get back the corresponding pawn jQuery DOM element of the instance itself
+  Cell.prototype.get$DOMPawn = function(){};
 
 
   // when clicking on a 'pawn', get back its corresponding 'Cell' instance
@@ -49,6 +59,8 @@
     return tableCells["c"+col+"r"+row];
 
   } //end 'getCellInstance'
+
+
 
 
   // NO USED ANYMORE

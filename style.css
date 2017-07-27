@@ -1,4 +1,4 @@
-.game-container {
+#game-container {
   display: grid;
   grid-template-columns: repeat(7,130px);
   grid-template-rows: repeat(6,130px);
