@@ -5,7 +5,6 @@ $(document).ready(function(){
   var rows = 6;
   var playerTonyTurn = false;
   var lastPlayedPawn = {};
-  var tableCells = {};
 
 
   // // DOM references
@@ -15,11 +14,10 @@ $(document).ready(function(){
 
   // // Helper functions
 
-  function createTableCell(columnNumber,rowNumber){
-    var cell = {};
-    cell.col = columnNumber;
-    cell.row = rowNumber;
-    return cell;
+  // create 'Cell' function constructor
+  function Cell(columnNumber,rowNumber){
+    this.col = columnNumber;
+    this.row = rowNumber;
   }
 
   // take row and column number of clicked pawn
@@ -57,14 +55,19 @@ $(document).ready(function(){
 
 
 
+  // // PROGRAM START
+
+
   // // Create 'tableCells' object with all properties of cells
+  // object containing all instances of 'Cell'
+  var tableCells = {};
   for(var c=0;c<columns;c++){
     for(var r=0;r<rows;r++){
-      tableCells["c"+c+"-r"+r] = createTableCell(c,r);
+      tableCells["c"+c+"-r"+r] = new Cell(c,r);
     }
   }
 
-
+  console.log(tableCells);
 
   // // Create board programmatically
   // Add columns
