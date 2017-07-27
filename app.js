@@ -146,7 +146,7 @@
   } // end 'colWin()'
 
 
-  // check for 4 pawns in a diagonal
+  // check for 4 pawns in right diagonal
   // 'true' --> checking for player tony
   // 'false' --> checking for player paul
   function rightDiagonalWin(tonyTurn){
@@ -158,6 +158,29 @@
       for(var c=0;c<columns-3;c++){
         // check for 4 adjacent pawns
         if(tableCells["c"+c+"r"+r][player] && tableCells["c"+(c+1)+"r"+(r+1)][player] && tableCells["c"+(c+2)+"r"+(r+2)][player] && tableCells["c"+(c+3)+"r"+(r+3)][player]){
+          //break the loop and return true
+          console.log("diagonal win!");
+          return true;
+        }
+
+      }
+    }
+
+  } // 'end rightDiagonalWin()'
+
+
+  // check for 4 pawns in left diagonal
+  // 'true' --> checking for player tony
+  // 'false' --> checking for player paul
+  function leftDiagonalWin(tonyTurn){
+    var player;
+    tonyTurn ? player="tonyPawn" : player="paulPawn";
+
+    // check for all pawns except last on the table, since starting there will be impossible to make a diagonal
+    for(var r=(rows-1);r>2;r--){
+      for(var c=0;c<columns-3;c++){
+        // check for 4 adjacent pawns
+        if(tableCells["c"+c+"r"+r][player] && tableCells["c"+(c+1)+"r"+(r-1)][player] && tableCells["c"+(c+2)+"r"+(r-2)][player] && tableCells["c"+(c+3)+"r"+(r-3)][player]){
           //break the loop and return true
           console.log("diagonal win!");
           return true;
@@ -212,7 +235,8 @@
     colWin(true);
     // check paul for winning
     colWin(false);
-    rightDiagonalWin(true);
+    rightDiagonalWin(false);
+    leftDiagonalWin(false);
 
     // change player's turn
     playerTonyTurn = !playerTonyTurn;
