@@ -67,7 +67,6 @@ $(document).ready(function(){
     }
   }
 
-  console.log(tableCells);
 
   // // Create board programmatically
   // Add columns
