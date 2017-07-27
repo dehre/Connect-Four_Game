@@ -23,16 +23,18 @@
   // get back the corresponding jQuery DOM element of the instance itself
   Cell.prototype.get$DOMCell = function(){
     var searchedClassName = ".row-" + this.row + ".col-" + this.col;
-    console.log("searchedClass ",searchedClassName);
     return $($gameContainer.children(searchedClassName)[0]);
   };
 
   // get back the corresponding pawn jQuery DOM element of the instance itself
-  Cell.prototype.get$DOMPawn = function(){};
+  Cell.prototype.get$DOMPawn = function(){
+    console.log("works");
+  };
 
 
   // when clicking on a 'pawn', get back its corresponding 'Cell' instance
-  function getCellInstance(pawnDOMElement){
+  // P.S. method to be called on the Constructor itself 'Cell.prototype.getCellInstance()'
+  Cell.prototype.getCellInstance(pawnDOMElement){
 
     var pawn$Element;
     var row;
