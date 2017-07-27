@@ -102,7 +102,7 @@
     tonyTurn ? player="tonyPawn" : player="paulPawn";
     var counter=0;
     for(var r=0;r<rows;r++){
-      for(var c=0;c<columns;c++){
+      for(var c=0;c<columns-3;c++){
         if(tableCells["c"+c+"r"+r][player]){
           counter += 1;
           if(counter>=4){
@@ -113,12 +113,12 @@
         } else {
           counter = 0;
         }
-      } //columns for loop
+      }
       // reset the counter for a new row check
       counter = 0;
-    } //rows for loop
-
+    }
   } // end 'rowWin()'
+
 
   // check for 4 pawns in a column
   // 'true' --> checking for player tony
@@ -128,7 +128,7 @@
     tonyTurn ? player="tonyPawn" : player="paulPawn";
     var counter=0;
     for(var c=0;c<columns;c++){
-      for(var r=0;r<rows;r++){
+      for(var r=0;r<rows-3;r++){
         if(tableCells["c"+c+"r"+r][player]){
           counter += 1;
           if(counter>=4){
@@ -139,13 +139,34 @@
         } else {
           counter = 0;
         }
-      } //rows for loop
+      }
       // reset the counter for a new row check
       counter = 0;
-    } //columns for loop
-
+    }
   } // end 'colWin()'
 
+
+  // check for 4 pawns in a diagonal
+  // 'true' --> checking for player tony
+  // 'false' --> checking for player paul
+  function rightDiagonalWin(tonyTurn){
+    var player;
+    tonyTurn ? player="tonyPawn" : player="paulPawn";
+
+    // check for all pawns except last on the table, since starting there will be impossible to make a diagonal
+    for(var r=0;r<rows-3;r++){
+      for(var c=0;c<columns-3;c++){
+        // check for 4 adjacent pawns
+        if(tableCells["c"+c+"r"+r][player] && tableCells["c"+(c+1)+"r"+(r+1)][player] && tableCells["c"+(c+2)+"r"+(r+2)][player] && tableCells["c"+(c+3)+"r"+(r+3)][player]){
+          //break the loop and return true
+          console.log("diagonal win!");
+          return true;
+        }
+
+      }
+    }
+
+  } // 'end rightDiagonalWin()'
 
 
 
@@ -191,6 +212,7 @@
     colWin(true);
     // check paul for winning
     colWin(false);
+    rightDiagonalWin(true);
 
     // change player's turn
     playerTonyTurn = !playerTonyTurn;
