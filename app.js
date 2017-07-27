@@ -1,6 +1,6 @@
 // $(document).ready(function(){
 
-  // // PLAYER NAMES ARE 'TONY' AND 'PAUL'
+  // // PLAYER NAMES ARE 'TONY' --> red AND 'PAUL' --> green
   // // Settings - varible declarations
   var columns = 7;
   var rows = 6;
@@ -75,7 +75,6 @@
     for(var i=0;i<rows;i++){
       if(!tableCells["c"+clickedCell.col+"r"+i].filled){
         var firstEmptyCell = tableCells["c"+clickedCell.col+"r"+i];
-        console.log("found!",firstEmptyCell);
 
         // fill corresponding DOM element (of 'firstEmptyCell') and update instance with new data
         if(tonyTurn){
@@ -93,6 +92,29 @@
     // if 'for' loop ended without founding an empty cell, means all column is filled, so we return false --> then we can handle it outside
     return false;
   }; // end 'addPawn()'
+
+
+  // check for 4 pawns in a row
+  function rowWin(tonyTurn){
+    var counter=0;
+    for(var r=0;r<rows;r++){
+      for(var c=0;c<columns;c++){
+        if(tableCells["c"+c+"r"+r].tonyPawn){
+          counter += 1;
+          if(counter>=4){
+            //break the loop and return true
+            console.log("Win!");
+            return true;
+          }
+        } else {
+          counter = 0;
+        }
+      } //columns for loop
+      // reset the counter for a new row check
+      counter = 0;
+    } //rows for loop
+
+  } // end 'rowWin()'
 
 
 
@@ -130,6 +152,9 @@
   $gameContainer.click(function(e){
     // invoke 'addPawn()' to fill first empty cell in column
     addPawn(e.target,playerTonyTurn);
+
+    // check for winning
+    rowWin(true);
 
     // change player's turn
     playerTonyTurn = !playerTonyTurn;
