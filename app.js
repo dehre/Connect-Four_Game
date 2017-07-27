@@ -28,14 +28,13 @@
 
   // get back the corresponding pawn jQuery DOM element of the instance itself
   Cell.prototype.get$DOMPawn = function(){
-    console.log("works");
+    return this.get$DOMCell().children().first();
   };
 
 
   // when clicking on a 'pawn', get back its corresponding 'Cell' instance
   // P.S. method to be called on the Constructor itself 'Cell.prototype.getCellInstance()'
-  Cell.prototype.getCellInstance(pawnDOMElement){
-
+  Cell.prototype.getCellInstance = function(pawnDOMElement){
     var pawn$Element;
     var row;
     var col;
