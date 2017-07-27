@@ -95,15 +95,18 @@
 
 
   // check for 4 pawns in a row
+  // 'true' --> checking for player tony
+  // 'false' --> checking for player paul
   function rowWin(tonyTurn){
+    var player;
+    tonyTurn ? player="tonyPawn" : player="paulPawn";
     var counter=0;
     for(var r=0;r<rows;r++){
       for(var c=0;c<columns;c++){
-        if(tableCells["c"+c+"r"+r].tonyPawn){
+        if(tableCells["c"+c+"r"+r][player]){
           counter += 1;
           if(counter>=4){
             //break the loop and return true
-            console.log("Win!");
             return true;
           }
         } else {
@@ -153,8 +156,10 @@
     // invoke 'addPawn()' to fill first empty cell in column
     addPawn(e.target,playerTonyTurn);
 
-    // check for winning
+    // check tony for winning
     rowWin(true);
+    // check paul for winning
+    rowWin(false);
 
     // change player's turn
     playerTonyTurn = !playerTonyTurn;
