@@ -18,19 +18,10 @@
   function Cell(columnNumber,rowNumber){
     this.col = columnNumber;
     this.row = rowNumber;
+    this.filled = false;
+    this.tonyPawn = false;
+    this.paulPawn = false;
   };
-
-  // get back the corresponding jQuery DOM element of the instance itself
-  Cell.prototype.get$DOMCell = function(){
-    var searchedClassName = ".row-" + this.row + ".col-" + this.col;
-    return $($gameContainer.children(searchedClassName)[0]);
-  };
-
-  // get back the corresponding pawn jQuery DOM element of the instance itself
-  Cell.prototype.get$DOMPawn = function(){
-    return this.get$DOMCell().children().first();
-  };
-
 
   // when clicking on a 'pawn', get back its corresponding 'Cell' instance
   // P.S. method to be called on the Constructor itself 'Cell.prototype.getCellInstance()'
@@ -44,7 +35,6 @@
     } else {
       pawn$Element = $(pawnDOMElement).parent();
     };
-
     // create list of classes related to the clicked element
     var elementClassList = pawn$Element.attr("class").split(" ");
     // retrieve the clicked row and column clicked (as number)
@@ -55,48 +45,22 @@
         col = className.substr(-1);
       }
     });
-
     // we retrieved row and column clicked, now return the correct instance back
     return tableCells["c"+col+"r"+row];
-
   } //end 'getCellInstance'
 
 
+  // get back the corresponding jQuery DOM element of the instance itself
+  Cell.prototype.get$DOMCell = function(){
+    var searchedClassName = ".row-" + this.row + ".col-" + this.col;
+    return $gameContainer.children(searchedClassName);
+  };
 
+  // get back the corresponding pawn jQuery DOM element of the instance itself
+  Cell.prototype.get$DOMPawn = function(){
+    return this.get$DOMCell().children();
+  };
 
-  // NO USED ANYMORE
-  // take row and column number of clicked pawn
-  function takeClickedPawn(pawnDOMElement){
-    // create empty object that contains current position of pawn, and pawn itself as jQuery object
-    var pawnObj = {};
-    // first check if clicked on a pawn itself or on the board
-    if($(pawnDOMElement).hasClass("board-cell")){
-      pawnObj.jQueryCellElement = $(pawnDOMElement);
-    } else {
-      pawnObj.jQueryCellElement = $(pawnDOMElement).parent();
-    }
-    // take a reference of the '.pawn' rounded <div> element inside the '.board-cell' itself
-    pawnObj.jQueryPawnElement = pawnObj.jQueryCellElement.children().first();
-    // create list of classes related to the clicked element
-    var elementClassList = pawnObj.jQueryCellElement.attr("class").split(" ");
-    // retrieve the clicked row and column clicked (as number)
-    elementClassList.forEach(function(className){
-      if(className.indexOf("row-")===0){
-        pawnObj.row = className.substr(-1);
-      } else if(className.indexOf("col-")===0) {
-        pawnObj.col = className.substr(-1);
-      }
-    });
-    // return object filled with current position of element in the board and its jQuery representation
-    return pawnObj;
-  }
-
-  // get array of all elements in same line of specific 'board-cell'
-  // first argument --> the boardCell element
-  // second argument --> direction to check ("row" or "col")
-  function getPawnElementsByLine(boardCell,direction){
-    return $gameContainer.children("."+direction+"-"+boardCell[direction]);
-  }
 
 
 
