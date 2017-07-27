@@ -1,5 +1,6 @@
 // $(document).ready(function(){
 
+  // // PLAYER NAMES ARE 'TONY' AND 'PAUL'
   // // Settings - varible declarations
   var columns = 7;
   var rows = 6;
@@ -59,6 +60,24 @@
   // get back the corresponding pawn jQuery DOM element of the instance itself
   Cell.prototype.get$DOMPawn = function(){
     return this.get$DOMCell().children();
+  };
+
+
+  // add a pawn when clicking on a column of '$gameContainer'
+  // arguments are DOMElement(usually 'e.target') and the player (boolean, true if tony playing)
+  // function fill the pawn in DOM and update the corresponding 'Cell' instance
+  function addPawn(DOMElement,tonyTurn){
+    // retrieve correct instance of 'Cell'
+    var clickedCell = Cell.prototype.getCellInstance(DOMElement);
+    // fill corresponding DOM element and update instance with new data
+    if(tonyTurn){
+      clickedCell.get$DOMPawn.addClass("pawn-tony");
+      clickedCell.tonyPawn = true;
+    } else {
+      clickedCell.get$DOMPawn.addClass("pawn-paul");
+      clickedCell.paulPawn = true;
+    };
+    clickedCell.filled = true;
   };
 
 
