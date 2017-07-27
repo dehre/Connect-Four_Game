@@ -107,6 +107,7 @@
           counter += 1;
           if(counter>=4){
             //break the loop and return true
+            console.log("row win!");
             return true;
           }
         } else {
@@ -118,6 +119,32 @@
     } //rows for loop
 
   } // end 'rowWin()'
+
+  // check for 4 pawns in a column
+  // 'true' --> checking for player tony
+  // 'false' --> checking for player paul
+  function colWin(tonyTurn){
+    var player;
+    tonyTurn ? player="tonyPawn" : player="paulPawn";
+    var counter=0;
+    for(var c=0;c<columns;c++){
+      for(var r=0;r<rows;r++){
+        if(tableCells["c"+c+"r"+r][player]){
+          counter += 1;
+          if(counter>=4){
+            //break the loop and return true
+            console.log("column win!");
+            return true;
+          }
+        } else {
+          counter = 0;
+        }
+      } //rows for loop
+      // reset the counter for a new row check
+      counter = 0;
+    } //columns for loop
+
+  } // end 'colWin()'
 
 
 
@@ -160,6 +187,10 @@
     rowWin(true);
     // check paul for winning
     rowWin(false);
+    // check tony for winning
+    colWin(true);
+    // check paul for winning
+    colWin(false);
 
     // change player's turn
     playerTonyTurn = !playerTonyTurn;
