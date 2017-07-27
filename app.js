@@ -44,10 +44,14 @@
         col = className.substr(-1);
       }
     });
-    
+
+    // we retrieved row and column clicked, now return the correct instance back
+    return tableCells["c"+col+"r"+row];
 
   } //end 'getCellInstance'
 
+
+  // NO USED ANYMORE
   // take row and column number of clicked pawn
   function takeClickedPawn(pawnDOMElement){
     // create empty object that contains current position of pawn, and pawn itself as jQuery object
@@ -91,7 +95,7 @@
   var tableCells = {};
   for(var c=0;c<columns;c++){
     for(var r=0;r<rows;r++){
-      tableCells["c"+c+"-r"+r] = new Cell(c,r);
+      tableCells["c"+c+"r"+r] = new Cell(c,r);
     }
   }
 
