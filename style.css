@@ -14,8 +14,8 @@ body {
 }
 #game-container {
   display: inline-grid;
-  grid-template-columns: repeat(7,130px);
-  grid-template-rows: repeat(6,130px);
+  grid-template-columns: repeat(7,100px);
+  grid-template-rows: repeat(6,100px);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -29,8 +29,8 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background-color: #fafafa;
 }
@@ -42,8 +42,10 @@ body {
 }
 
 .user-interactions {
+  display: flex;
+  align-items: center;
   width: 80%;
-  margin: 0 auto;
+  margin: 4em auto;
 }
 input.player-name {
   width: 40%;
@@ -62,3 +64,8 @@ input.player-name {
   box-shadow: inset 0 0 5px 5px green;
   color: green;
 }*/
+#start-button {
+  width: 120px;
+  margin-left: auto;
+  margin-right: auto;
+}
