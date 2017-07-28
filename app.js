@@ -132,12 +132,12 @@
   // add a pawn when clicking on a column of '$gameContainer'
   // arguments are DOMElement(usually 'e.target') and the player (boolean, true if tony playing)
   // function fill the pawn in DOM and update the corresponding 'Cell' instance
-  function addPawn(DOMElement,tonyTurn){
+  function addPawnByDOMReference(DOMElement,tonyTurn){
     // retrieve correct instance of 'Cell'
     var clickedCell = Cell.prototype.getCellInstance(DOMElement);
     // return the same boolean value that 'addPawnByColumn()' returns
     return addPawnByColumn(clickedCell.col,tonyTurn,true);
-  }; // end 'addPawn()'
+  }; // end 'addPawnByDOMReference()'
 
 
   // check for 4 pawns in a row
@@ -403,8 +403,8 @@
     if(!endMatch){
       // clear '.message-box' for previuos messages, if any
       $messageBox.html("");
-      // invoke 'addPawn()' to fill first empty cell in column. If column is filled already, give a message to user and let him play again
-      if(!addPawn(e.target,playerTonyTurn)){
+      // invoke 'addPawnByDOMReference()' to fill first empty cell in column. If column is filled already, give a message to user and let him play again
+      if(!addPawnByDOMReference(e.target,playerTonyTurn)){
         $messageBox.html("<h2 class='message'>There are no more available spaces in this column. Fill another space!</h2>");
         return;
       };
