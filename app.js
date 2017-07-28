@@ -6,6 +6,7 @@
   var rows = 6;
   var playerTonyTurn = true;
   var endMatch = false;
+  var againstAI = false;
 
 
   // // DOM references
@@ -15,6 +16,7 @@
   var $inputFieldPaulName = $("#input-paul-name");
   var $startButton = $("#start-button");
   var $messageBox = $(".message-box");
+  var $AIButton = $("#AI-button");
 
 
 
@@ -339,12 +341,24 @@
   // // Add 'click' eventListener '#start-button' to start a new game
   $startButton.click(function(e){
     if(endMatch){
-      startNewGame()
+      // make sure you don't wanna play against computer
+
+      // then start new game
+      startNewGame();
     } else {
       $messageBox.html("<h2 class='message'>This match isn't ended yet, try to win instead of refusing!</h2>");
     }
   }); //end '$startButton.click()'
 
+
+  // // Add 'click' eventListener '#AI-button' to start a new game against the machine
+  $AIButton.click(function(e){
+    // turn on flag for playing against machine
+    againstAI = true;
+    // start a new game
+    startNewGame();
+    // IMPLEMENT change name to computer and block input field from changing
+  });
 
 
   // // Add 'click' eventListener on entire board to fill the '.pawn', if game hasn't ended already
@@ -364,10 +378,14 @@
       // change player's turn for next move, if game hasn't ended already
       if(!endMatch){
         changePlayerTurn();
+
+        if(againstAI){
+          // if playing against computer, make it playing, then change turn again
+          computerPlay();
+          changePlayerTurn()
+        }
       }
     }
-
-    //?? TO IMPLEMENT: if all column filled, 'addPawn()' returns false --> add message <div> elsewhere to inform user
 
   }); //end '$gameContainer.click()'
 
