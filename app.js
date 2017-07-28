@@ -17,7 +17,10 @@
   var $messageBox = $(".message-box");
 
 
-  // // Helper functions
+
+  // // // // // // // // // // // //
+   // //  HELPER FUNCTIONS     // //
+  // // // // // // // // // // // //
 
   // create 'Cell' function constructor
   function Cell(columnNumber,rowNumber){
@@ -268,7 +271,18 @@
   }
 
 
-  // // PROGRAM START
+
+
+
+
+
+
+
+
+
+  // // // // // // // // // // // //
+   // //     PROGRAM START     // //
+  // // // // // // // // // // // //
 
 
   // // Translate '.title' from the top inside the screen
@@ -319,7 +333,7 @@
     if(!endMatch){
       // clear '.message-box' for previuos messages, if any
       $messageBox.html("");
-      // invoke 'addPawn()' to fill first empty cell in column
+      // invoke 'addPawn()' to fill first empty cell in column. If column is filled already, give a message to user and let him play again
       if(!addPawn(e.target,playerTonyTurn)){
         $messageBox.html("<h2 class='message'>There are no more available spaces in this column. Fill another space!</h2>");
         return;
