@@ -193,27 +193,17 @@
   } // 'end leftDiagonalWin()'
 
 
-  // check for Tony win
-  function checkTonyWin(){
-    if(rowWin(true) || colWin(true) || rightDiagonalWin(true) || leftDiagonalWin(true)){
-      // Retrieve player's name from input field, if <input> empty just print 'Red'
-      var tonyName;
-      $inputFieldTonyName.val() ? tonyName = $inputFieldTonyName.val() : tonyName = "Red";
+  // check for player win
+  // 'true' --> checking for player tony
+  // 'false' --> checking for player paul
+  function checkPlayerWin(tonyTurn){
+    // Need only one function returning true to know there are 4 pawns inline
+    if(rowWin(tonyTurn) || colWin(tonyTurn) || rightDiagonalWin(tonyTurn) || leftDiagonalWin(tonyTurn)){
+      // Choose correct input field to catch player's name from
+      var $inputField;
+      tonyTurn ? $inputField = $inputFieldTonyName : $inputField = $inputFieldPaulName;
       // Inform users that Tony won
-      $messageBox.html("<h2 class='message'>" + tonyName + " won this match!</h2>");
-      // end the game
-      endMatch = true;
-    }
-  }
-
-  // check for Paul win
-  function checkPaulWin(){
-    if(rowWin(false) || colWin(false) || rightDiagonalWin(false) || leftDiagonalWin(false)){
-      // Retrieve player's name from input field, if <input> empty just print 'Green'
-      var paulName;
-      $inputFieldTonyName.val() ? paulName = $inputFieldPaulName.val() : paulName = "Green";
-      // Inform users that Tony won
-      $messageBox.html("<h2 class='message'>" + paulName + " won this match!</h2>");
+      $messageBox.html("<h2 class='message'>" + ($inputField.val() || "Someone") + " won this match!</h2>");
       // end the game
       endMatch = true;
     }
@@ -287,13 +277,13 @@
       // invoke 'addPawn()' to fill first empty cell in column
       addPawn(e.target,playerTonyTurn);
 
-      // check players for winning
-      playerTonyTurn ? checkTonyWin() : checkPaulWin();
+      // check players for winning --> 'endMatch' may become true
+      checkPlayerWin(playerTonyTurn);
 
-      // change player's turn if game hasn't ended
-        if(!endMatch){
-          changePlayerTurn();
-        }
+      // change player's turn for next move, if game hasn't ended already
+      if(!endMatch){
+        changePlayerTurn();
+      }
     }
 
     //?? TO IMPLEMENT: if all column filled, 'addPawn()' returns false --> add message <div> elsewhere to inform user
