@@ -144,6 +144,17 @@
         if(tableCells["c"+c+"r"+r][player]){
           counter += 1;
           if(counter>=4){
+
+            // create an array containing the winning pawns --> so we visually highlight them in case of winning
+            var winningPawns = [];
+            for(var i=r;i>(r-4);i--){
+              winningPawns.push(tableCells["c"+c+"r"+i]);
+            };
+            // add smiley face inside winningPawns
+            winningPawns.forEach(function(cellInstance){
+              cellInstance.get$DOMPawn().append("<div class='smile-win'></div>");
+            });
+
             //break the loop and return true
             console.log("column win!");
             return true;
@@ -247,7 +258,6 @@
     $inputFieldTonyName.addClass("player-tony-field");
     $inputFieldPaulName.removeClass("player-paul-field");
     $messageBox.html("");
-
   }
 
 
