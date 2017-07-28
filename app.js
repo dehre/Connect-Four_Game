@@ -72,18 +72,14 @@
   };
 
 
-  // add a pawn when clicking on a column of '$gameContainer'
-  // arguments are DOMElement(usually 'e.target') and the player (boolean, true if tony playing)
-  // function fill the pawn in DOM and update the corresponding 'Cell' instance
-  function addPawn(DOMElement,tonyTurn){
-    // retrieve correct instance of 'Cell'
-    var clickedCell = Cell.prototype.getCellInstance(DOMElement);
-
+  // add pawn by column given as augument
+  // arguments are the column number and the player (boolean, true if tony playing, false is paul or computer)
+  function addPawnByColumn(columnNumber,tonyTurn){
     // check for first empty fill starting from below. Then fill it and update its instance.
     // if no empty cells, return false --> so can handle it.
     for(var i=0;i<rows;i++){
-      if(!tableCells["c"+clickedCell.col+"r"+i].filled){
-        var firstEmptyCell = tableCells["c"+clickedCell.col+"r"+i];
+      if(!tableCells["c"+columnNumber+"r"+i].filled){
+        var firstEmptyCell = tableCells["c"+columnNumber+"r"+i];
 
         // fill corresponding DOM element (of 'firstEmptyCell') and update instance with new data
         if(tonyTurn){
@@ -100,6 +96,17 @@
     }
     // if 'for' loop ended without founding an empty cell, means all column is filled, so we return false --> then we can handle it outside
     return false;
+  } //end 'addPawnByColumn()'
+
+
+  // add a pawn when clicking on a column of '$gameContainer'
+  // arguments are DOMElement(usually 'e.target') and the player (boolean, true if tony playing)
+  // function fill the pawn in DOM and update the corresponding 'Cell' instance
+  function addPawn(DOMElement,tonyTurn){
+    // retrieve correct instance of 'Cell'
+    var clickedCell = Cell.prototype.getCellInstance(DOMElement);
+    // return the same boolean value that 'addPawnByColumn()' returns
+    return addPawnByColumn(clickedCell.col,tonyTurn);
   }; // end 'addPawn()'
 
 
