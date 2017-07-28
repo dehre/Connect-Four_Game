@@ -119,7 +119,6 @@
               cellInstance.get$DOMPawn().append("<div class='smile-win'></div>");
             });
             //break the loop and return true
-            console.log("row win!, winningPawns are",winningPawns);
             return true;
           }
         } else {
@@ -154,9 +153,7 @@
             winningPawns.forEach(function(cellInstance){
               cellInstance.get$DOMPawn().append("<div class='smile-win'></div>");
             });
-
             //break the loop and return true
-            console.log("column win!");
             return true;
           }
         } else {
@@ -181,8 +178,11 @@
       for(var c=0;c<columns-3;c++){
         // check for 4 adjacent pawns
         if(tableCells["c"+c+"r"+r][player] && tableCells["c"+(c+1)+"r"+(r+1)][player] && tableCells["c"+(c+2)+"r"+(r+2)][player] && tableCells["c"+(c+3)+"r"+(r+3)][player]){
+          // if there are, wrap them into an array and append the smiley-face '<div>' inside each one as children
+          [tableCells["c"+c+"r"+r],tableCells["c"+(c+1)+"r"+(r+1)],tableCells["c"+(c+2)+"r"+(r+2)],tableCells["c"+(c+3)+"r"+(r+3)]].forEach(function(cellInstance){
+            cellInstance.get$DOMPawn().append("<div class='smile-win'></div>");
+          });
           //break the loop and return true
-          console.log("diagonal win!");
           return true;
         }
 
@@ -203,8 +203,11 @@
       for(var c=0;c<columns-3;c++){
         // check for 4 adjacent pawns
         if(tableCells["c"+c+"r"+r][player] && tableCells["c"+(c+1)+"r"+(r-1)][player] && tableCells["c"+(c+2)+"r"+(r-2)][player] && tableCells["c"+(c+3)+"r"+(r-3)][player]){
+          // if there are, wrap them into an array and append the smiley-face '<div>' inside each one as children
+          [tableCells["c"+c+"r"+r],tableCells["c"+(c+1)+"r"+(r-1)],tableCells["c"+(c+2)+"r"+(r-2)],tableCells["c"+(c+3)+"r"+(r-3)]].forEach(function(cellInstance){
+            cellInstance.get$DOMPawn().append("<div class='smile-win'></div>");
+          });
           //break the loop and return true
-          console.log("diagonal win!");
           return true;
         }
 
