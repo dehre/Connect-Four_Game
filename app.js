@@ -380,14 +380,20 @@
         changePlayerTurn();
 
         if(againstAI){
-          // if playing against computer, make it playing, then change turn again
+          // if playing against computer, make it playing
           computerPlay();
-          changePlayerTurn()
+          // check it for winning --> 'endMatch' may become true
+          checkPlayerWin(playerTonyTurn);
+          if(!endMatch){
+            // change turn again
+            changePlayerTurn()
+          }
         }
       }
     }
 
   }); //end '$gameContainer.click()'
+
 
 
 // }); //end or '$document.ready()'
