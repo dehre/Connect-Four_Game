@@ -9,6 +9,13 @@ body {
   font-size: 60px;
   text-shadow: 4px 4px 16px black;
   text-align: center;
+  transition-property: transform;
+  transition-duration: 2s;
+  transition-timing-function: cubic-bezier(0.98, -1.22, 0, 1.87);
+  transform: translateX(-3000px);
+}
+.title-entered {
+  transform: translateX(0);
 }
 .board-centered {
   text-align: center;

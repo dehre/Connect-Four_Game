@@ -9,6 +9,7 @@
 
 
   // // DOM references
+  var $title = $(".title");
   var $gameContainer = $("#game-container");
   var $inputFieldTonyName = $("#input-tony-name");
   var $inputFieldPaulName = $("#input-paul-name");
@@ -265,6 +266,12 @@
 
 
   // // PROGRAM START
+
+
+  // // Translate '.title' from the top inside the screen
+  setTimeout(function(){
+    $title.addClass("title-entered");
+  },1000)
 
 
   // // Create 'tableCells' object with all properties of cells
