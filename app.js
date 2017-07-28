@@ -109,8 +109,17 @@
         if(tableCells["c"+c+"r"+r][player]){
           counter += 1;
           if(counter>=4){
+            // create an array containing the winning pawns --> so we visually highlight them in case of winning
+            var winningPawns = [];
+            for(var i=c;i>(c-4);i--){
+              winningPawns.push(tableCells["c"+i+"r"+r]);
+            };
+            // add smiley face inside winningPawns
+            winningPawns.forEach(function(cellInstance){
+              cellInstance.get$DOMPawn().append("<div class='smile-win'></div>");
+            });
             //break the loop and return true
-            console.log("row win!");
+            console.log("row win!, winningPawns are",winningPawns);
             return true;
           }
         } else {
@@ -233,7 +242,7 @@
     });
     // Clear DOM changes
     $.each($gameContainer.children(),function(i,cell){
-      $(cell).children().first().removeClass("pawn-tony pawn-paul");
+      $(cell).children().first().removeClass("pawn-tony pawn-paul").empty();
     });
     $inputFieldTonyName.addClass("player-tony-field");
     $inputFieldPaulName.removeClass("player-paul-field");
