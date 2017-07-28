@@ -220,6 +220,18 @@
   } // 'end leftDiagonalWin()'
 
 
+  // check for table completely filled
+  function checkFilledTable(){
+    // if any of the cells is empty, returns false. Otherwise returns true
+    for(var key in tableCells){
+      if(tableCells[key].filled===false){
+        return false
+      }
+    }
+    return true;
+  }
+
+
   // check for player win
   // 'true' --> checking for player tony
   // 'false' --> checking for player paul
@@ -233,6 +245,13 @@
       $messageBox.html("<h2 class='message'>" + ($inputField.val() || "Someone") + " won this match!</h2>");
       // Increase size of player's name
       $inputField.addClass("player-scale")
+      // end the game
+      endMatch = true;
+    }
+    // If nobody won yet, check also for completely filled table
+    if(checkFilledTable()){
+      // Inform users that table is full and game is ended
+      $messageBox.html("<h2 class='message'>You are too good! Just start another match!</h2>");
       // end the game
       endMatch = true;
     }
