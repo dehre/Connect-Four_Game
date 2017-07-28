@@ -10,6 +10,9 @@
 
   // // DOM references
   var $gameContainer = $("#game-container");
+  var $messageBox = $(".message-box");
+  var $inputFieldTonyName = $("#input-tony-name");
+  var $inputFieldPaulName = $("#input-paul-name");
 
 
 
@@ -102,7 +105,7 @@
     tonyTurn ? player="tonyPawn" : player="paulPawn";
     var counter=0;
     for(var r=0;r<rows;r++){
-      for(var c=0;c<columns-3;c++){
+      for(var c=0;c<columns;c++){
         if(tableCells["c"+c+"r"+r][player]){
           counter += 1;
           if(counter>=4){
@@ -128,7 +131,7 @@
     tonyTurn ? player="tonyPawn" : player="paulPawn";
     var counter=0;
     for(var c=0;c<columns;c++){
-      for(var r=0;r<rows-3;r++){
+      for(var r=0;r<rows;r++){
         if(tableCells["c"+c+"r"+r][player]){
           counter += 1;
           if(counter>=4){
@@ -165,7 +168,6 @@
 
       }
     }
-
   } // 'end rightDiagonalWin()'
 
 
@@ -188,9 +190,30 @@
 
       }
     }
+  } // 'end leftDiagonalWin()'
 
-  } // 'end rightDiagonalWin()'
 
+  // check for Tony win
+  function checkTonyWin(){
+    if(rowWin(true) || colWin(true) || rightDiagonalWin(true) || leftDiagonalWin(true)){
+      // Retrieve player's name from input field, if <input> empty just print 'Red'
+      var tonyName;
+      $inputFieldTonyName.val() ? tonyName = $inputFieldTonyName.val() : tonyName = "Red";
+      // Inform users that Tony won
+      $messageBox.html("<h2 class='message'>" + tonyName + " won this match!</h2>");
+    }
+  }
+
+  // check for Paul win
+  function checkPaulWin(){
+    if(rowWin(false) || colWin(false) || rightDiagonalWin(false) || leftDiagonalWin(false)){
+      // Retrieve player's name from input field, if <input> empty just print 'Green'
+      var paulName;
+      $inputFieldTonyName.val() ? paulName = $inputFieldPaulName.val() : paulName = "Green";
+      // Inform users that Tony won
+      $messageBox.html("<h2 class='message'>" + paulName + " won this match!</h2>");
+    }
+  }
 
 
   // // PROGRAM START
@@ -227,16 +250,11 @@
     // invoke 'addPawn()' to fill first empty cell in column
     addPawn(e.target,playerTonyTurn);
 
-    // check tony for winning
-    rowWin(true);
-    // check paul for winning
-    rowWin(false);
-    // check tony for winning
-    colWin(true);
-    // check paul for winning
-    colWin(false);
-    rightDiagonalWin(false);
-    leftDiagonalWin(false);
+    // check Tony for winning
+    checkTonyWin();
+    // check Paul for winning
+    checkPaulWin();
+
 
     // change player's turn
     playerTonyTurn = !playerTonyTurn;
@@ -247,3 +265,6 @@
 
 
 // }); //end or '$document.ready()'
+
+
+//write function for changing turn
