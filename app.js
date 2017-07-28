@@ -385,7 +385,11 @@
     }
 
     // finally pick a random item inside the 'rightMoves' array
-    
+    var randomIndex = Math.floor(Math.random() * (rightMoves.length-1));
+    var chosenColumnNumber = rightMoves[randomIndex];
+
+    // now computer can play its move, updating the read DOM
+    addPawnByColumn(chosenColumnNumber,false,true);
 
   } //end 'computerPlay()'
 
