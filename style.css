@@ -1,8 +1,23 @@
+body {
+  background-color: #fafafa;
+}
+
+.title {
+  color: white;
+  font-family: 'Roboto Slab', serif;
+  font-size: 60px;
+  text-shadow: 4px 4px 16px black;
+  text-align: center;
+}
+.board-centered {
+  text-align: center;
+}
 #game-container {
-  display: grid;
+  display: inline-grid;
   grid-template-columns: repeat(7,130px);
   grid-template-rows: repeat(6,130px);
-  margin: 2em;
+  border-radius: 10px;
+  overflow: hidden;
 }
 .board-cell {
   position: relative;
@@ -17,7 +32,7 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-color: white;
+  background-color: #fafafa;
 }
 .pawn-tony {
   background-color: red;
@@ -25,3 +40,25 @@
 .pawn-paul {
   background-color: green;
 }
+
+.user-interactions {
+  width: 80%;
+  margin: 0 auto;
+}
+input.player-name {
+  width: 40%;
+  background-color: #fafafa;
+  border: none;
+  box-shadow: inset 0 0 5px 5px #888;
+  color: #888;
+  font-size: 70px;
+  text-align: center;
+}
+/*#player-tony-name {
+  box-shadow: inset 0 0 5px 5px red;
+  color: red;
+}
+#player-paul-name {
+  box-shadow: inset 0 0 5px 5px green;
+  color: green;
+}*/
