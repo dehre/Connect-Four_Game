@@ -258,17 +258,19 @@
 
 
 
-  // // Add 'click' eventListener on entire board to fill the '.pawn'
+  // // Add 'click' eventListener on entire board to fill the '.pawn', if game hasn't ended already
   $gameContainer.click(function(e){
-    // invoke 'addPawn()' to fill first empty cell in column
-    addPawn(e.target,playerTonyTurn);
-
-    // check players for winning
-    playerTonyTurn ? checkTonyWin() : checkPaulWin();
-
-    // change player's turn if game hasn't ended
     if(!endMatch){
-      changePlayerTurn();
+      // invoke 'addPawn()' to fill first empty cell in column
+      addPawn(e.target,playerTonyTurn);
+
+      // check players for winning
+      playerTonyTurn ? checkTonyWin() : checkPaulWin();
+
+      // change player's turn if game hasn't ended
+        if(!endMatch){
+          changePlayerTurn();
+        }
     }
 
     //?? TO IMPLEMENT: if all column filled, 'addPawn()' returns false --> add message <div> elsewhere to inform user
