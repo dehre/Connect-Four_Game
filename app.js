@@ -286,6 +286,8 @@
       $inputField.addClass("player-scale")
       // end the game
       endMatch = true;
+      // return 'true' for winning case
+      return true;
     }
     // If nobody won yet, check also for completely filled table
     if(checkFilledTable()){
@@ -327,6 +329,65 @@
     $inputFieldPaulName.removeClass("player-paul-field player-scale");
     $messageBox.html("");
   }
+
+
+  // computer makes its calculations and play
+  function computerPlay(){
+
+    // computer plays a dry run on its possible moves
+    // DOM won't be changed
+    // save winning column numbers for computer into array
+    var winningMoves = [];
+    for(var c=0;c<columns;c++){
+      addPawnByColumn(c,false,false);
+      if(checkPlayerWin(false)){
+        winningMoves.push(c)
+      };
+      // remove last player pawn
+      removePawnByColumn(c,false);
+    }
+
+    // computer plays a dry run on Tony's possible moves --> check if playing a pawn will block Tony
+    // DOM won't be changed
+    // save blocking column numbers for tony into array
+    var blockingMoves = [];
+    for(var c=0;c<columns;c++){
+      addPawnByColumn(c,true,false);
+      if(checkPlayerWin(true)){
+        winningMoves.push(c)
+      };
+      // remove last player pawn
+      removePawnByColumn(c,true);
+    }
+
+    // if there are column numbers in common between 'blockingMoves' and 'winningMoves', save them into 'rightMoves' array
+    var matchingMoves = [];
+    for(var i=0;i<winningMoves;i++){
+      if(blockingMoves.includes(winningMoves[i])){
+        matchingMoves.push(winningMoves[i]);
+      }
+    }
+
+    // create an array of right choices for computer to play. First choice are moves contained inside 'matchingMoves', otherwise inside 'winningMoves', otherwise inside 'blockingMoves'.
+    // if all lists are empty, just pick a random column
+    if(matchingMoves.length>0){
+      var rightMoves = matchingMoves;
+    } else if(winningMoves.length>0){
+      var rightMoves = winningMoves;
+    } else if(blockingMoves.length>0){
+      var rightMoves = blockingMoves;
+    } else {
+      // otherwise create an array filled of all the column numbers
+      var rightMoves=[];
+      for(var c=0;c<columns;c++){
+        rightMoves.push(c);
+      }
+    }
+
+    // finally pick a random item inside the 'rightMoves' array
+    
+
+  } //end 'computerPlay()'
 
 
 
@@ -379,7 +440,7 @@
   $startButton.click(function(e){
     if(endMatch){
       // make sure you don't wanna play against computer
-
+      againstAI = false;
       // then start new game
       startNewGame();
     } else {
