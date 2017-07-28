@@ -10,10 +10,10 @@
 
   // // DOM references
   var $gameContainer = $("#game-container");
-  var $messageBox = $(".message-box");
   var $inputFieldTonyName = $("#input-tony-name");
   var $inputFieldPaulName = $("#input-paul-name");
-
+  var $startButton = $("#start-button");
+  var $messageBox = $(".message-box");
 
 
   // // Helper functions
@@ -271,9 +271,22 @@
 
 
 
+  // // Add 'click' eventListener '#start-button' to start a new game
+  $startButton.click(function(e){
+    if(endMatch){
+      startNewGame()
+    } else {
+      $messageBox.html("<h2 class='message'>This match isn't ended yet, try to win instead of refusing!</h2>");
+    }
+  }); //end '$startButton.click()'
+
+
+
   // // Add 'click' eventListener on entire board to fill the '.pawn', if game hasn't ended already
   $gameContainer.click(function(e){
     if(!endMatch){
+      // clear '.message-box' for previuos messages, if any
+      $messageBox.html("");
       // invoke 'addPawn()' to fill first empty cell in column
       addPawn(e.target,playerTonyTurn);
 
