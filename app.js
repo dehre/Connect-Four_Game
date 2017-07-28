@@ -4,8 +4,9 @@
   // // Settings - varible declarations
   var columns = 7;
   var rows = 6;
-  var playerTonyTurn = false;
+  var playerTonyTurn = true;
   var lastPlayedPawn = {};
+  var endMatch = false;
 
 
   // // DOM references
@@ -201,6 +202,8 @@
       $inputFieldTonyName.val() ? tonyName = $inputFieldTonyName.val() : tonyName = "Red";
       // Inform users that Tony won
       $messageBox.html("<h2 class='message'>" + tonyName + " won this match!</h2>");
+      // end the game
+      endMatch = true;
     }
   }
 
@@ -213,6 +216,16 @@
       // Inform users that Tony won
       $messageBox.html("<h2 class='message'>" + paulName + " won this match!</h2>");
     }
+  }
+
+
+  // as function name said..
+  function changePlayerTurn(){
+    // invert 'playerTonyTurn' boolean flag
+    playerTonyTurn = !playerTonyTurn;
+    // visually change CSS classes on <input> fields for player names
+    $inputFieldTonyName.toggleClass("player-tony-field");
+    $inputFieldPaulName.toggleClass("player-paul-field");
   }
 
 
@@ -250,14 +263,13 @@
     // invoke 'addPawn()' to fill first empty cell in column
     addPawn(e.target,playerTonyTurn);
 
-    // check Tony for winning
-    checkTonyWin();
-    // check Paul for winning
-    checkPaulWin();
+    // check players for winning
+    playerTonyTurn ? checkTonyWin() : checkPaulWin();
 
-
-    // change player's turn
-    playerTonyTurn = !playerTonyTurn;
+    // change player's turn if game hasn't ended
+    if(!endMatch){
+      changePlayerTurn();
+    }
 
     //?? TO IMPLEMENT: if all column filled, 'addPawn()' returns false --> add message <div> elsewhere to inform user
 
