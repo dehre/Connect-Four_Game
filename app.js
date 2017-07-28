@@ -99,6 +99,32 @@
   } //end 'addPawnByColumn()'
 
 
+  // remove pawn by column given as augument, WITHOUT UPDATING THE DOM
+  // PS this method must be called if there's already at least one pawn in the column
+  // arguments are the column number and the player (boolean, true if tony playing, false is paul or computer)
+  function removePawnByColumn(columnNumber,tonyTurn){
+    // check for first empty fill starting from below. Then fill it and update its instance.
+    // if no empty cells, return false --> so can handle it.
+    for(var i=0;i<rows;i++){
+      if(!tableCells["c"+columnNumber+"r"+i].filled){
+        var lastFilledCell = tableCells["c"+columnNumber+"r"+(i-1)];
+
+        // update instance with new data
+        if(tonyTurn){
+          lastFilledCell.tonyPawn = false;
+        } else {
+          lastFilledCell.paulPawn = false;
+        };
+        lastFilledCell.filled = false;
+        // break the loop if an empty cell was found, and exit the function
+        return true;
+      };
+    }
+    // if 'for' loop ended without founding an empty cell, means all column is filled, so we return false --> then we can handle it outside
+    return false;
+  } //end 'removePawnByColumn()'
+
+
   // add a pawn when clicking on a column of '$gameContainer'
   // arguments are DOMElement(usually 'e.target') and the player (boolean, true if tony playing)
   // function fill the pawn in DOM and update the corresponding 'Cell' instance
