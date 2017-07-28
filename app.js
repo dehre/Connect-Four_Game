@@ -320,7 +320,10 @@
       // clear '.message-box' for previuos messages, if any
       $messageBox.html("");
       // invoke 'addPawn()' to fill first empty cell in column
-      addPawn(e.target,playerTonyTurn);
+      if(!addPawn(e.target,playerTonyTurn)){
+        $messageBox.html("<h2 class='message'>There are no more available spaces in this column. Fill another space!</h2>");
+        return;
+      };
 
       // check players for winning --> 'endMatch' may become true
       checkPlayerWin(playerTonyTurn);
