@@ -1,5 +1,6 @@
 body {
   background-color: #fafafa;
+  overflow-x: hidden;
 }
 
 .title {
@@ -101,4 +102,38 @@ body {
 }
 .message-box .message {
   margin: .2em;
+}
+.right-menu-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 200px;
+  font-family: 'Roboto Slab', serif;
+  border-bottom-left-radius: 100px;
+  background-color: green;
+  transition: transform 2s;
+  transform: translateX(200px) translateY(-100px);
+}
+.right-menu-button:hover{
+  transform: translateX(0) translateY(0);
+}
+.right-menu-title {
+  color: white;
+  font-family: 'Roboto Slab', serif;
+  font-size: 30px;
+  text-shadow: 4px 4px 16px white;
+  text-align: center;
+}
+.right-menu-select {
+  text-align: center;
+}
+.right-menu-select button {
+  width: 50%;
+  color: white;
+  font-size: 2em;
+  border: none;
+  background-color: #1c5410;
+  font-family: 'Roboto Slab', serif;
+  border-radius: 2em;
 }
