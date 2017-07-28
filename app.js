@@ -5,7 +5,6 @@
   var columns = 7;
   var rows = 6;
   var playerTonyTurn = true;
-  var lastPlayedPawn = {};
   var endMatch = false;
 
 
@@ -215,6 +214,8 @@
       $inputFieldTonyName.val() ? paulName = $inputFieldPaulName.val() : paulName = "Green";
       // Inform users that Tony won
       $messageBox.html("<h2 class='message'>" + paulName + " won this match!</h2>");
+      // end the game
+      endMatch = true;
     }
   }
 
@@ -226,6 +227,28 @@
     // visually change CSS classes on <input> fields for player names
     $inputFieldTonyName.toggleClass("player-tony-field");
     $inputFieldPaulName.toggleClass("player-paul-field");
+  }
+
+
+  // start new game from scratch. Reset global variables. Clear DOM from previous played game
+  function startNewGame(){
+    // Reset variables
+    playerTonyTurn = true;
+    endMatch = false;
+    // Clear 'Cell' instances from previous records
+    Object.keys(tableCells).forEach(function(key){
+      tableCells[key].filled = false;
+      tableCells[key].tonyPawn = false;
+      tableCells[key].paulPawn = false;
+    });
+    // Clear DOM changes
+    $.each($gameContainer.children(),function(i,cell){
+      $(cell).children().first().removeClass("pawn-tony pawn-paul");
+    });
+    $inputFieldTonyName.addClass("player-tony-field");
+    $inputFieldPaulName.removeClass("player-paul-field");
+    $messageBox.html("");
+
   }
 
 
@@ -279,6 +302,3 @@
 
 
 // }); //end or '$document.ready()'
-
-
-//write function for changing turn
