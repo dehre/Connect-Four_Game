@@ -75,6 +75,7 @@ body {
   color: #888;
   font-size: 55px;
   text-align: center;
+  transition: transform 1.5s;
 }
 .player-tony-field {
   box-shadow: inset 0 0 5px 5px red;
@@ -83,6 +84,9 @@ body {
 .player-paul-field {
   box-shadow: inset 0 0 5px 5px green;
   color: rgb(141,198,63);
+}
+.player-scale {
+  transform: scale(1.25);
 }
 #start-button {
   width: 100px;

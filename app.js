@@ -228,6 +228,8 @@
       tonyTurn ? $inputField = $inputFieldTonyName : $inputField = $inputFieldPaulName;
       // Inform users that Tony won
       $messageBox.html("<h2 class='message'>" + ($inputField.val() || "Someone") + " won this match!</h2>");
+      // Increase size of player's name
+      $inputField.addClass("player-scale")
       // end the game
       endMatch = true;
     }
@@ -260,7 +262,8 @@
       $(cell).children().first().removeClass("pawn-tony pawn-paul").empty();
     });
     $inputFieldTonyName.addClass("player-tony-field");
-    $inputFieldPaulName.removeClass("player-paul-field");
+    $inputFieldTonyName.removeClass("player-scale");
+    $inputFieldPaulName.removeClass("player-paul-field player-scale");
     $messageBox.html("");
   }
 
