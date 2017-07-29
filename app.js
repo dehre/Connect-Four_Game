@@ -292,38 +292,41 @@
   // check for player win
   // first argument 'true' --> checking for player tony
   // first argument 'false' --> checking for player paul
-  // second argument false to perform a dry run, without impacting the real situation of the game, just returns 'true' if someone wins. Set to false by default
   function checkPlayerWin(tonyTurn,dryRun){
-    // set 'dryRun' to false by default if no second argument passed
-    dryRun = dryRun || false;
     // Need only one function returning true to know there are 4 pawns inline
     if(rowWin(tonyTurn) || colWin(tonyTurn) || rightDiagonalWin(tonyTurn) || leftDiagonalWin(tonyTurn)){
-      // if not performing a dry run, change the 'message-box' and end the game
-      if(!dryRun){
-        // Choose correct input field to catch player's name from
-        var $inputField;
-        tonyTurn ? $inputField = $inputFieldTonyName : $inputField = $inputFieldPaulName;
-        // Inform users that Tony won
-        $messageBox.html("<h2 class='message'>" + ($inputField.val() || "Someone") + " won this match!</h2>");
-        // Increase size of player's name
-        $inputField.addClass("player-scale")
-        // end the game
-        endMatch = true;
-      }
+      // Choose correct input field to catch player's name from
+      var $inputField;
+      tonyTurn ? $inputField = $inputFieldTonyName : $inputField = $inputFieldPaulName;
+      // Inform users that Tony won
+      $messageBox.html("<h2 class='message'>" + ($inputField.val() || "Someone") + " won this match!</h2>");
+      // Increase size of player's name
+      $inputField.addClass("player-scale")
+      // end the game
+      endMatch = true;
+    // return 'true' for winning case
+    return true;
+    }
+    // If nobody won yet, check also for completely filled table
+    if(checkFilledTable()){
+      // Inform users that table is full and game is ended
+      $messageBox.html("<h2 class='message'>You are too good! Just start another match!</h2>");
+      // end the game
+      endMatch = true;
+    }
+  } //end 'checkPlayerWin()'
+
+
+  // check for player winning without impacting the DOM and the real flow of the game
+  function checkPlayerWinDryRun(tonyTurn){
+    // set 'dryRun' to true
+    dryRun = true;
+    // Need only one function returning true to know there are 4 pawns inline
+    if(rowWin(tonyTurn,dryRun) || colWin(tonyTurn,dryRun) || rightDiagonalWin(tonyTurn,dryRun) || leftDiagonalWin(tonyTurn,dryRun)){
       // return 'true' for winning case
       return true;
     }
-    // no need to check for wrong moves when computer is playing
-    if(!dryRun){
-      // If nobody won yet, check also for completely filled table
-      if(checkFilledTable()){
-        // Inform users that table is full and game is ended
-        $messageBox.html("<h2 class='message'>You are too good! Just start another match!</h2>");
-        // end the game
-        endMatch = true;
-      }
-    }
-  } //end 'checkPlayerWin()'
+  } //end 'checkPlayerWinDryRun()'
 
 
   // as function name said..
