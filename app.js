@@ -24,6 +24,20 @@
    // //  HELPER FUNCTIONS     // //
   // // // // // // // // // // // //
 
+
+  // given an array as argument, return back a new array containing only the duplicates
+  function duplicatedItems(arr){
+    var sortedArr = arr.sort();
+    var resultingArr = [];
+    for(var i=0;i<sortedArr.length-1;i++){
+      if(sortedArr[i] === sortedArr[i+1]){
+        resultingArr.push(sortedArr[i])
+      };
+    }
+    return resultingArr;
+  }
+
+
   // create 'Cell' function constructor
   function Cell(columnNumber,rowNumber){
     this.col = columnNumber;
