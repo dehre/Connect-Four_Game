@@ -114,7 +114,7 @@ body {
   transition: transform 2s;
   transform: translateX(200px) translateY(-150px);
 }
-.right-menu-button:hover{
+.right-menu-button-appear {
   transform: translateX(0) translateY(0);
 }
 .right-menu-title {

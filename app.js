@@ -17,6 +17,7 @@
   var $inputFieldPaulName = $("#input-paul-name");
   var $startButton = $("#start-button");
   var $messageBox = $(".message-box");
+  var $AIMenu = $(".right-menu-button");
   var $AIButtonEasy = $("#AI-button-easy");
   var $AIButtonHard = $("#AI-button-hard");
 
@@ -536,8 +537,18 @@
   }); //end '$startButton.click()'
 
 
+  // make the AI menu on the top right appear when hovered over, and disappear when hovered out
+  $AIMenu.hover(function(){
+    $(this).addClass("right-menu-button-appear")
+  },function(){
+    $(this).removeClass("right-menu-button-appear")
+  })
+
+
   // // Add 'click' eventListener '#AI-button-easy' to start a new easy game against the machine
   $AIButtonEasy.click(function(e){
+    // move the AI menu off the screen once clicked on a button
+    $AIMenu.removeClass("right-menu-button-appear");
     // start a new game
     startNewGame();
     // turn on flag for playing against machine
@@ -548,6 +559,8 @@
 
   // // Add 'click' eventListener '#AI-button-hard' to start a new hard game against the machine
   $AIButtonHard.click(function(e){
+    // move the AI menu off the screen once clicked on a button
+    $AIMenu.removeClass("right-menu-button-appear");
     // start a new game
     startNewGame();
     // turn on flag for playing against machine
