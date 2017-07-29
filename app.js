@@ -400,31 +400,29 @@
       // remove last player pawn
       removePawnByColumn(c,false);
     }
-    console.log("inspect");
     // if there are duplicated items, means that those moves are better, so just keep them
-    var helperList = winningMovesTotalList;
+    var helperListWin = winningMovesTotalList;
     var winningMoves = winningMovesTotalList;
-    while(helperList.length>0){
-      winningMoves = helperList;
-      helperList = duplicatedItems(helperList);
+    while(helperListWin.length>0){
+      winningMoves = helperListWin;
+      helperListWin = duplicatedItems(helperListWin);
     }
-    console.log("inspect");
 
     // computer plays a dry run on Tony's possible moves --> check if playing a pawn will block Tony
     // DOM won't be changed
     // save blocking column numbers for tony into array
-    var blockingMoves = [];
+    var blockingMovesTotalList = [];
     for(var c=0;c<columns;c++){
       addPawnByColumn(c,true,false);
       if(checkPlayerWinDryRun(true)){
-        blockingMoves.push(c)
+        blockingMovesTotalList.push(c)
       };
       // if computer level is hard, perform another checking for possible moves, catching blockingMoves 2 levels ahead
       if(true){
         for(var d=0;d<columns;d++){
           addPawnByColumn(d,false,false);
           if(checkPlayerWinDryRun(false)){
-            blockingMoves.push(d)
+            blockingMovesTotalList.push(d)
           };
           // remove last player pawn
           removePawnByColumn(d,false);
@@ -433,6 +431,14 @@
       // remove last player pawn
       removePawnByColumn(c,true);
     }
+    // if there are duplicated items, means that those moves are better, so just keep them
+    var helperListBlk = blockingMovesTotalList;
+    var blockingMoves = blockingMovesTotalList;
+    while(helperListBlk.length>0){
+      blockingMoves = helperListBlk;
+      helperListBlk = duplicatedItems(helperListBlk);
+    }
+
 
     // if there are column numbers in common between 'blockingMoves' and 'winningMoves', save them into 'rightMoves' array
     var matchingMoves = [];
