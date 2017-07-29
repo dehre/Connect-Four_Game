@@ -33,9 +33,20 @@
     this.paulPawn = false;
   };
 
+  // get back the corresponding jQuery DOM element of the instance itself
+  Cell.prototype.get$DOMCell = function(){
+    var searchedClassName = ".row-" + this.row + ".col-" + this.col;
+    return $gameContainer.children(searchedClassName);
+  };
+
+  // get back the corresponding pawn jQuery DOM element of the instance itself
+  Cell.prototype.get$DOMPawn = function(){
+    return this.get$DOMCell().children();
+  };
+
+
   // when clicking on a 'pawn', get back its corresponding 'Cell' instance
-  // P.S. method to be called on the Constructor itself 'Cell.prototype.getCellInstance()'
-  Cell.prototype.getCellInstance = function(pawnDOMElement){
+  function getCellInstance(pawnDOMElement){
     var pawn$Element;
     var row;
     var col;
@@ -58,18 +69,6 @@
     // we retrieved row and column clicked, now return the correct instance back
     return tableCells["c"+col+"r"+row];
   } //end 'getCellInstance'
-
-
-  // get back the corresponding jQuery DOM element of the instance itself
-  Cell.prototype.get$DOMCell = function(){
-    var searchedClassName = ".row-" + this.row + ".col-" + this.col;
-    return $gameContainer.children(searchedClassName);
-  };
-
-  // get back the corresponding pawn jQuery DOM element of the instance itself
-  Cell.prototype.get$DOMPawn = function(){
-    return this.get$DOMCell().children();
-  };
 
 
   // add pawn by column given as augument. Updates the DOM only if a third argument of 'true' is passed
@@ -134,7 +133,7 @@
   // function fill the pawn in DOM and update the corresponding 'Cell' instance
   function addPawnByDOMReference(DOMElement,tonyTurn){
     // retrieve correct instance of 'Cell'
-    var clickedCell = Cell.prototype.getCellInstance(DOMElement);
+    var clickedCell = getCellInstance(DOMElement);
     // return the same boolean value that 'addPawnByColumn()' returns
     return addPawnByColumn(clickedCell.col,tonyTurn,true);
   }; // end 'addPawnByDOMReference()'
