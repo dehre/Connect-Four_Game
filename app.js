@@ -16,7 +16,8 @@
   var $inputFieldPaulName = $("#input-paul-name");
   var $startButton = $("#start-button");
   var $messageBox = $(".message-box");
-  var $AIButton = $("#AI-button");
+  var $AIButtonEasy = $("#AI-button-easy");
+  var $AIButtonHard = $("#AI-button-hard");
 
 
 
@@ -375,7 +376,8 @@
 
 
   // computer makes its calculations and play
-  function computerPlay(){
+  // if called with 'true' as argument, it turns into hard-difficult mode
+  function computerPlay(hardDifficultLevel){
 
     // computer plays a dry run on its possible moves
     // DOM won't be changed
@@ -387,7 +389,7 @@
         winningMovesTotalList.push(c)
       };
       // if computer level is hard, perform another checking for possible moves, catching winningMoves 2 levels ahead
-      if(true){
+      if(hardDifficultLevel){
         for(var d=0;d<columns;d++){
           addPawnByColumn(d,false,false);
           if(checkPlayerWinDryRun(false)){
@@ -418,7 +420,7 @@
         blockingMovesTotalList.push(c)
       };
       // if computer level is hard, perform another checking for possible moves, catching blockingMoves 2 levels ahead
-      if(true){
+      if(hardDifficultLevel){
         for(var d=0;d<columns;d++){
           addPawnByColumn(d,false,false);
           if(checkPlayerWinDryRun(false)){
@@ -533,11 +535,21 @@
   }); //end '$startButton.click()'
 
 
-  // // Add 'click' eventListener '#AI-button' to start a new game against the machine
-  $AIButton.click(function(e){
+  // // Add 'click' eventListener '#AI-button-easy' to start a new easy game against the machine
+  $AIButtonEasy.click(function(e){
     // turn on flag for playing against machine
     againstAI = true;
     // start a new game
+    startNewGame();
+    // change Paul name to computer, letting user know he's playing against the AI
+    $inputFieldPaulName.val("Super AI");
+  });
+
+  // // Add 'click' eventListener '#AI-button-hard' to start a new hard game against the machine
+  $AIButtonHard.click(function(e){
+    // turn on flag for playing against machine
+    againstAI = true;
+    // start a new game, difficult flag passed as argument
     startNewGame();
     // change Paul name to computer, letting user know he's playing against the AI
     $inputFieldPaulName.val("Super AI");
