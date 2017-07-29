@@ -107,12 +107,12 @@ body {
   top: 0;
   right: 0;
   width: 300px;
-  height: 200px;
+  height: 250px;
   font-family: 'Roboto Slab', serif;
   border-bottom-left-radius: 100px;
   background-color: green;
   transition: transform 2s;
-  transform: translateX(200px) translateY(-100px);
+  transform: translateX(200px) translateY(-150px);
 }
 .right-menu-button:hover{
   transform: translateX(0) translateY(0);
@@ -129,6 +129,7 @@ body {
 }
 .right-menu-select button {
   width: 50%;
+  margin-bottom: .5em;
   color: white;
   font-size: 2em;
   border: none;
