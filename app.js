@@ -1,4 +1,4 @@
-// $(document).ready(function(){
+$(document).ready(function(){
 
   // // PLAYER NAMES ARE 'TONY' --> red AND 'PAUL' --> green
   // // Settings - varible declarations
@@ -605,6 +605,4 @@
 
   }); //end '$gameContainer.click()'
 
-
-
-// }); //end or '$document.ready()'
+}); //end or '$document.ready()'
