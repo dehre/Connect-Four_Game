@@ -31,7 +31,6 @@ body {
 .board-cell {
   position: relative;
   background-color: blue;
-  border: 1px solid black;
 }
 .pawn {
   position: absolute;
