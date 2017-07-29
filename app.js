@@ -354,7 +354,7 @@
     for(var c=0;c<columns;c++){
       addPawnByColumn(c,true,false);
       if(checkPlayerWin(true)){
-        winningMoves.push(c)
+        blockingMoves.push(c)
       };
       // remove last player pawn
       removePawnByColumn(c,true);
@@ -362,7 +362,7 @@
 
     // if there are column numbers in common between 'blockingMoves' and 'winningMoves', save them into 'rightMoves' array
     var matchingMoves = [];
-    for(var i=0;i<winningMoves;i++){
+    for(var i=0;i<winningMoves.length;i++){
       if(blockingMoves.includes(winningMoves[i])){
         matchingMoves.push(winningMoves[i]);
       }
