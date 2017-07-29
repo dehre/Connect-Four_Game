@@ -380,18 +380,18 @@
     // computer plays a dry run on its possible moves
     // DOM won't be changed
     // save winning column numbers for computer into array
-    var winningMoves = [];
+    var winningMovesTotalList = [];
     for(var c=0;c<columns;c++){
       addPawnByColumn(c,false,false);
       if(checkPlayerWinDryRun(false)){
-        winningMoves.push(c)
+        winningMovesTotalList.push(c)
       };
       // if computer level is hard, perform another checking for possible moves, catching winningMoves 2 levels ahead
       if(true){
         for(var d=0;d<columns;d++){
           addPawnByColumn(d,false,false);
           if(checkPlayerWinDryRun(false)){
-            winningMoves.push(d)
+            winningMovesTotalList.push(d)
           };
           // remove last player pawn
           removePawnByColumn(d,false);
@@ -400,6 +400,15 @@
       // remove last player pawn
       removePawnByColumn(c,false);
     }
+    console.log("inspect");
+    // if there are duplicated items, means that those moves are better, so just keep them
+    var helperList = winningMovesTotalList;
+    var winningMoves = winningMovesTotalList;
+    while(helperList.length>0){
+      winningMoves = helperList;
+      helperList = duplicatedItems(helperList);
+    }
+    console.log("inspect");
 
     // computer plays a dry run on Tony's possible moves --> check if playing a pawn will block Tony
     // DOM won't be changed
