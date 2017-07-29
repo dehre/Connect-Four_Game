@@ -143,7 +143,10 @@
   // check for 4 pawns in a row
   // 'true' --> checking for player tony
   // 'false' --> checking for player paul
-  function rowWin(tonyTurn){
+  // pass second argument of 'true' to perform a dry run without updating the DOM
+  function rowWin(tonyTurn,dryRun){
+    // set 'dryRun' to false by default if no second argument passed
+    dryRun = dryRun || false;
     var player;
     tonyTurn ? player="tonyPawn" : player="paulPawn";
     var counter=0;
@@ -152,15 +155,17 @@
         if(tableCells["c"+c+"r"+r][player]){
           counter += 1;
           if(counter>=4){
-            // create an array containing the winning pawns --> so we visually highlight them in case of winning
-            var winningPawns = [];
-            for(var i=c;i>(c-4);i--){
-              winningPawns.push(tableCells["c"+i+"r"+r]);
-            };
-            // add smiley face inside winningPawns
-            winningPawns.forEach(function(cellInstance){
-              cellInstance.get$DOMPawn().append("<div class='smile-win'></div>");
-            });
+            if(!dryRun){
+              // create an array containing the winning pawns --> so we visually highlight them in case of winning
+              var winningPawns = [];
+              for(var i=c;i>(c-4);i--){
+                winningPawns.push(tableCells["c"+i+"r"+r]);
+              };
+              // add smiley face inside winningPawns
+              winningPawns.forEach(function(cellInstance){
+                cellInstance.get$DOMPawn().append("<div class='smile-win'></div>");
+              });
+            }
             //break the loop and return true
             return true;
           }
@@ -177,7 +182,10 @@
   // check for 4 pawns in a column
   // 'true' --> checking for player tony
   // 'false' --> checking for player paul
-  function colWin(tonyTurn){
+  // pass second argument of 'true' to perform a dry run without updating the DOM
+  function colWin(tonyTurn,dryRun){
+    // set 'dryRun' to false by default if no second argument passed
+    dryRun = dryRun || false;
     var player;
     tonyTurn ? player="tonyPawn" : player="paulPawn";
     var counter=0;
@@ -186,16 +194,17 @@
         if(tableCells["c"+c+"r"+r][player]){
           counter += 1;
           if(counter>=4){
-
-            // create an array containing the winning pawns --> so we visually highlight them in case of winning
-            var winningPawns = [];
-            for(var i=r;i>(r-4);i--){
-              winningPawns.push(tableCells["c"+c+"r"+i]);
-            };
-            // add smiley face inside winningPawns
-            winningPawns.forEach(function(cellInstance){
-              cellInstance.get$DOMPawn().append("<div class='smile-win'></div>");
-            });
+            if(!dryRun){
+              // create an array containing the winning pawns --> so we visually highlight them in case of winning
+              var winningPawns = [];
+              for(var i=r;i>(r-4);i--){
+                winningPawns.push(tableCells["c"+c+"r"+i]);
+              };
+              // add smiley face inside winningPawns
+              winningPawns.forEach(function(cellInstance){
+                cellInstance.get$DOMPawn().append("<div class='smile-win'></div>");
+              });
+            }
             //break the loop and return true
             return true;
           }
@@ -212,7 +221,10 @@
   // check for 4 pawns in right diagonal
   // 'true' --> checking for player tony
   // 'false' --> checking for player paul
-  function rightDiagonalWin(tonyTurn){
+  // pass second argument of 'true' to perform a dry run without updating the DOM
+  function rightDiagonalWin(tonyTurn,dryRun){
+    // set 'dryRun' to false by default if no second argument passed
+    dryRun = dryRun || false;
     var player;
     tonyTurn ? player="tonyPawn" : player="paulPawn";
 
@@ -221,10 +233,12 @@
       for(var c=0;c<columns-3;c++){
         // check for 4 adjacent pawns
         if(tableCells["c"+c+"r"+r][player] && tableCells["c"+(c+1)+"r"+(r+1)][player] && tableCells["c"+(c+2)+"r"+(r+2)][player] && tableCells["c"+(c+3)+"r"+(r+3)][player]){
-          // if there are, wrap them into an array and append the smiley-face '<div>' inside each one as children
-          [tableCells["c"+c+"r"+r],tableCells["c"+(c+1)+"r"+(r+1)],tableCells["c"+(c+2)+"r"+(r+2)],tableCells["c"+(c+3)+"r"+(r+3)]].forEach(function(cellInstance){
-            cellInstance.get$DOMPawn().append("<div class='smile-win'></div>");
-          });
+          if(!dryRun){
+            // if there are, wrap them into an array and append the smiley-face '<div>' inside each one as children
+            [tableCells["c"+c+"r"+r],tableCells["c"+(c+1)+"r"+(r+1)],tableCells["c"+(c+2)+"r"+(r+2)],tableCells["c"+(c+3)+"r"+(r+3)]].forEach(function(cellInstance){
+              cellInstance.get$DOMPawn().append("<div class='smile-win'></div>");
+            });
+          }
           //break the loop and return true
           return true;
         }
@@ -237,7 +251,10 @@
   // check for 4 pawns in left diagonal
   // 'true' --> checking for player tony
   // 'false' --> checking for player paul
-  function leftDiagonalWin(tonyTurn){
+  // pass second argument of 'true' to perform a dry run without updating the DOM
+  function leftDiagonalWin(tonyTurn,dryRun){
+    // set 'dryRun' to false by default if no second argument passed
+    dryRun = dryRun || false;
     var player;
     tonyTurn ? player="tonyPawn" : player="paulPawn";
 
@@ -246,14 +263,15 @@
       for(var c=0;c<columns-3;c++){
         // check for 4 adjacent pawns
         if(tableCells["c"+c+"r"+r][player] && tableCells["c"+(c+1)+"r"+(r-1)][player] && tableCells["c"+(c+2)+"r"+(r-2)][player] && tableCells["c"+(c+3)+"r"+(r-3)][player]){
-          // if there are, wrap them into an array and append the smiley-face '<div>' inside each one as children
-          [tableCells["c"+c+"r"+r],tableCells["c"+(c+1)+"r"+(r-1)],tableCells["c"+(c+2)+"r"+(r-2)],tableCells["c"+(c+3)+"r"+(r-3)]].forEach(function(cellInstance){
-            cellInstance.get$DOMPawn().append("<div class='smile-win'></div>");
-          });
+          if(!dryRun){
+            // if there are, wrap them into an array and append the smiley-face '<div>' inside each one as children
+            [tableCells["c"+c+"r"+r],tableCells["c"+(c+1)+"r"+(r-1)],tableCells["c"+(c+2)+"r"+(r-2)],tableCells["c"+(c+3)+"r"+(r-3)]].forEach(function(cellInstance){
+              cellInstance.get$DOMPawn().append("<div class='smile-win'></div>");
+            });
+          }
           //break the loop and return true
           return true;
         }
-
       }
     }
   } // 'end leftDiagonalWin()'
