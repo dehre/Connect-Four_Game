@@ -488,7 +488,8 @@
     againstAI = true;
     // start a new game
     startNewGame();
-    // IMPLEMENT change name to computer and block input field from changing
+    // change Paul name to computer, letting user know he's playing against the AI
+    $inputFieldPaulName.val("Super AI");
   });
 
 
