@@ -372,6 +372,17 @@
       if(checkPlayerWinDryRun(false)){
         winningMoves.push(c)
       };
+      // if computer level is hard, perform another checking for possible moves, catching winningMoves 2 levels ahead
+      if(true){
+        for(var d=0;d<columns;d++){
+          addPawnByColumn(d,false,false);
+          if(checkPlayerWinDryRun(false)){
+            winningMoves.push(d)
+          };
+          // remove last player pawn
+          removePawnByColumn(d,false);
+        }
+      }
       // remove last player pawn
       removePawnByColumn(c,false);
     }
@@ -385,6 +396,17 @@
       if(checkPlayerWinDryRun(true)){
         blockingMoves.push(c)
       };
+      // if computer level is hard, perform another checking for possible moves, catching blockingMoves 2 levels ahead
+      if(true){
+        for(var d=0;d<columns;d++){
+          addPawnByColumn(d,false,false);
+          if(checkPlayerWinDryRun(false)){
+            blockingMoves.push(d)
+          };
+          // remove last player pawn
+          removePawnByColumn(d,false);
+        }
+      }
       // remove last player pawn
       removePawnByColumn(c,true);
     }
