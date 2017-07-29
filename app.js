@@ -370,7 +370,7 @@
     var winningMoves = [];
     for(var c=0;c<columns;c++){
       addPawnByColumn(c,false,false);
-      if(checkPlayerWin(false,true)){
+      if(checkPlayerWinDryRun(false)){
         winningMoves.push(c)
       };
       // remove last player pawn
@@ -383,7 +383,7 @@
     var blockingMoves = [];
     for(var c=0;c<columns;c++){
       addPawnByColumn(c,true,false);
-      if(checkPlayerWin(true,true)){
+      if(checkPlayerWinDryRun(true)){
         blockingMoves.push(c)
       };
       // remove last player pawn
