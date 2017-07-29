@@ -291,7 +291,7 @@
   // check for player win
   // first argument 'true' --> checking for player tony
   // first argument 'false' --> checking for player paul
-  function checkPlayerWin(tonyTurn,dryRun){
+  function checkPlayerWin(tonyTurn){
     // Need only one function returning true to know there are 4 pawns inline
     if(rowWin(tonyTurn) || colWin(tonyTurn) || rightDiagonalWin(tonyTurn) || leftDiagonalWin(tonyTurn)){
       // Choose correct input field to catch player's name from
