@@ -7,6 +7,7 @@
   var playerTonyTurn = true;
   var endMatch = false;
   var againstAI = false;
+  var againstAIHard = false;
 
 
   // // DOM references
@@ -358,6 +359,8 @@
     // Reset variables
     playerTonyTurn = true;
     endMatch = false;
+    againstAI = false;
+    againstAIHard = false;
     // Clear 'Cell' instances from previous records
     Object.keys(tableCells).forEach(function(key){
       tableCells[key].filled = false;
@@ -525,9 +528,7 @@
   // // Add 'click' eventListener '#start-button' to start a new game
   $startButton.click(function(e){
     if(endMatch){
-      // make sure you don't wanna play against computer
-      againstAI = false;
-      // then start new game
+      // start new game if previuos match ended
       startNewGame();
     } else {
       $messageBox.html("<h2 class='message'>This match isn't ended yet, try to win instead of refusing!</h2>");
@@ -537,20 +538,21 @@
 
   // // Add 'click' eventListener '#AI-button-easy' to start a new easy game against the machine
   $AIButtonEasy.click(function(e){
-    // turn on flag for playing against machine
-    againstAI = true;
     // start a new game
     startNewGame();
+    // turn on flag for playing against machine
+    againstAI = true;
     // change Paul name to computer, letting user know he's playing against the AI
-    $inputFieldPaulName.val("Super AI");
+    $inputFieldPaulName.val("Easy AI");
   });
 
   // // Add 'click' eventListener '#AI-button-hard' to start a new hard game against the machine
   $AIButtonHard.click(function(e){
+    // start a new game
+    startNewGame();
     // turn on flag for playing against machine
     againstAI = true;
-    // start a new game, difficult flag passed as argument
-    startNewGame();
+    againstAIHard = true;
     // change Paul name to computer, letting user know he's playing against the AI
     $inputFieldPaulName.val("Super AI");
   });
@@ -576,7 +578,8 @@
 
         if(againstAI){
           // if playing against computer, make it playing
-          computerPlay();
+          // check if 'hard' difficult level is turned on
+          againstAIHard ? computerPlay(true) : computerPlay();
           // check it for winning --> 'endMatch' may become true
           checkPlayerWin(playerTonyTurn);
           if(!endMatch){
